@@ -1,0 +1,35 @@
+apiVersion: v1/app
+kind: Deployment
+metadata:
+  name:
+    lables:
+      app: springjenkins
+spec:
+  replicas: 1 
+  selector: 
+    matchLables:
+      app: springjenkins
+  template:
+    metadata:
+      lables:
+        app: springjenkins
+    spec:
+      containers:
+        - name: springjenkins
+          image: sarfarazchohan26211/spring-jenkins:10
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9091
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  springjenkins
+spec:
+  ports:
+    - protocol: TCP
+      port: 9091
+      targetPort: 9091
+  selector:
+    app: springjenkins
